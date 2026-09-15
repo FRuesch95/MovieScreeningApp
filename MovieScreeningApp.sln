@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieScreeningApp.Api", "MovieScreeningApp.Api\MovieScreeningApp.Api.csproj", "{450D9F69-3885-47CA-BF15-E0729E11C7DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EC94A9F-DF32-4311-B929-1B804AFBB59D}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
