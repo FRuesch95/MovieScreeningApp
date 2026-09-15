@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "MovieScreeningApp.Frontend", "MovieScreeningApp.Frontend\MovieScreeningApp.Frontend.esproj", "{53199B7E-8999-46F5-917D-97568228ADAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +19,9 @@ Global
 		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{450D9F69-3885-47CA-BF15-E0729E11C7DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53199B7E-8999-46F5-917D-97568228ADAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53199B7E-8999-46F5-917D-97568228ADAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53199B7E-8999-46F5-917D-97568228ADAF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{53199B7E-8999-46F5-917D-97568228ADAF}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
