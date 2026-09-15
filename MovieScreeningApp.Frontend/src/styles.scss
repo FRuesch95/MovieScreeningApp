@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'bootstrap/scss/bootstrap';
+@use '@fortawesome/fontawesome-free/css/all.min.css';
+
+@use './variables' as variables;
+
+
+
+.inset-0 {
+  inset: 0;
+}
+
+.main-card {
+
+  padding: 30px;
+  border-radius: 30px;
+  background: variables.$dark-transparent;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: variables.$grey-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #434447;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5c5c5c;
+}

@@ -3,4 +3,9 @@
     <StartupCommand>npm start</StartupCommand>
     <BuildCommand>npm run build</BuildCommand>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\movies\components\" />
+    <Folder Include="src\app\movies\components\movie-list\" />
+    <Folder Include="src\app\movies\services\" />
+  </ItemGroup>
 </Project>

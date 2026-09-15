@@ -1,0 +1,59 @@
+
+
+
+main {
+  flex-grow: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+
+.router-container {
+  width: 90%;
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.bg-image-container {
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+  overflow: hidden;
+
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    //filter: blur(3px);
+    transform: scale(1.4);
+  }
+
+  .bg-image-overlay {
+    position: absolute;
+    inset: 0;
+
+    backdrop-filter: blur(4px);
+
+    background: rgba(0, 0, 0, 0.3);
+
+    .bg-image-overlay-bottom-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 100px;
+
+      background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.95) 80%
+      );
+    }
+  }
+}
+
