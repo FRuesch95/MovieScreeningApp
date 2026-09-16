@@ -1,0 +1,27 @@
+<div class="mt-4">
+
+  <h2 class="mb-4">My favourites</h2>
+
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+
+  @if (loading()) {
+    <div class="text-center my-5">
+      <div class="spinner-border" role="status"></div>
+    </div>
+  } @else if (favorites().length === 0) {
+    <div class="main-card text-center">
+      <h5 class="mb-0">You have no favourites yet.</h5>
+    </div>
+  } @else {
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 mb-4">
+      @for (favorite of favorites(); track favorite.showId) {
+        <div class="col">
+          <app-movie-card [movie]="favorite" [isFavorite]="true" (favoriteToggle)="remove($event)" />
+        </div>
+      }
+    </div>
+  }
+
+</div>

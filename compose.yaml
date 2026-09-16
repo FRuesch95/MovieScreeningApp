@@ -1,4 +1,16 @@
 services:
+  frontend:
+    image: moviescreeningapp.frontend
+    build:
+      context: MovieScreeningApp.Frontend
+    depends_on:
+      - backend
+    labels:
+      traefik.enable: true
+      traefik.http.routers.movie-screening-frontend.rule: Host(`${HOSTNAME}`) && !PathPrefix(`/api/`)
+      traefik.http.routers.movie-screening-frontend.entrypoints: websecure
+      traefik.http.routers.movie-screening-frontend.tls: true
+
   backend:
     image: moviescreeningapp.api
     build:
@@ -8,6 +20,11 @@ services:
       db:
         condition: service_healthy
         restart: true
+    labels:
+      traefik.enable: true
+      traefik.http.routers.movie-screening-backend.rule: Host(`${HOSTNAME}`) && PathPrefix(`/api/`)
+      traefik.http.routers.movie-screening-backend.entrypoints: websecure
+      traefik.http.routers.movie-screening-backend.tls: true
     environment:
       - ConnectionStrings__DbConnection=Server=database;Database=${MARIADB_DATABASE};User=${MARIADB_USER};Password=${MARIADB_PASSWORD};
       - Admin__Token=${ADMIN_TOKEN}
@@ -30,3 +47,8 @@ services:
 volumes:
   filestore:
   db:
+
+networks:
+  default:
+    external: true
+    name: traefik_reverse_proxy

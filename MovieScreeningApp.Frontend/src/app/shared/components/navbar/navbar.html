@@ -1,20 +1,20 @@
 <div class="" data-bs-theme="dark">
   <nav class="navbar navbar-expand-lg bg-body-tertiary dark-navbar">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Movie App</a>
+      <a class="navbar-brand" routerLink="/">Movie App</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/movies">Movies</a>
+            <a class="nav-link" routerLink="/movies" routerLinkActive="active">Movies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/favourites">Favourites</a>
+            <a class="nav-link" routerLink="/favourites" routerLinkActive="active">Favourites</a>
           </li>
         </ul>
 
@@ -27,10 +27,10 @@
               <span class="fa-solid fa-user"></span>
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="/not-implemented-yet">My account</a></li>
-              <li><a class="dropdown-item" href="/favourites">My favourites</a></li>
+              <li><a class="dropdown-item" routerLink="/not-implemented-yet">My account</a></li>
+              <li><a class="dropdown-item" routerLink="/favourites">My favourites</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/not-implemented-yet">Logout</a></li>
+              <li><a class="dropdown-item" routerLink="/not-implemented-yet">Logout</a></li>
             </ul>
           </li>
         </ul>

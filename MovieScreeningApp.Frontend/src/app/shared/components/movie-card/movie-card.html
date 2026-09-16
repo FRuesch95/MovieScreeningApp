@@ -1,0 +1,37 @@
+<div class="card movie-card h-100">
+  <div class="poster">
+    @if (movie().posterUrl) {
+      <img [src]="movie().posterUrl" [alt]="movie().title" loading="lazy">
+    } @else {
+      <div class="poster-placeholder">
+        <span class="fa-solid fa-film"></span>
+      </div>
+    }
+
+    <button type="button"
+            class="btn favorite-button"
+            [class.active]="isFavorite()"
+            [title]="isFavorite() ? 'Remove from favourites' : 'Add to favourites'"
+            (click)="favoriteToggle.emit(movie())">
+      <span class="fa-heart" [class.fa-solid]="isFavorite()" [class.fa-regular]="!isFavorite()"></span>
+    </button>
+
+    <span class="badge rating-badge">
+      <span class="fa-solid fa-star me-1"></span>{{ movie().rating }}
+    </span>
+  </div>
+
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title mb-1">{{ movie().title }}</h5>
+    <div class="text-secondary small mb-2">
+      @if (movie().releaseYear) {
+        <span>{{ movie().releaseYear }}</span>
+      }
+      @if (movie().releaseYear && movie().genres) {
+        <span> · </span>
+      }
+      <span>{{ movie().genres }}</span>
+    </div>
+    <p class="card-text overview">{{ movie().overview }}</p>
+  </div>
+</div>

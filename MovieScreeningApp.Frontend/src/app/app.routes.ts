@@ -14,6 +14,12 @@ export const routes: Routes = [
         .then(m => m.MovieList)
   },
   {
+    path: 'favourites',
+    loadComponent: () =>
+      import('./favorites/components/favorite-list/favorite-list')
+        .then(m => m.FavoriteList)
+  },
+  {
     path: 'not-implemented-yet',
     loadComponent: () =>
       import('./shared/components/not-implemented-yet/not-implemented-yet')

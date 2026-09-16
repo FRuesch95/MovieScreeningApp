@@ -1,5 +1,84 @@
+<div class="mt-4" data-bs-theme="dark">
 
-<div class="w-100 mt-5 text-center main-card" style="height: 3000px">
+  <form class="main-card mb-4" (ngSubmit)="search()">
+    <div class="row g-3 align-items-end">
+      <div class="col-12 col-md-4">
+        <label class="form-label" for="title">Title</label>
+        <input id="title" name="title" class="form-control" type="text" placeholder="Search by title"
+               [(ngModel)]="filter.title">
+      </div>
 
-  <h2>Movies</h2>
+      <div class="col-6 col-md-2">
+        <label class="form-label" for="year">Year</label>
+        <input id="year" name="year" class="form-control" type="number" min="1900" max="2100" placeholder="Any"
+               [(ngModel)]="filter.year">
+      </div>
+
+      <div class="col-6 col-md-3">
+        <label class="form-label" for="genre">Genre</label>
+        <select id="genre" name="genre" class="form-select" [(ngModel)]="filter.genre" (ngModelChange)="search()">
+          <option value="">All genres</option>
+          @for (genre of genres(); track genre.id) {
+            <option [value]="genre.id">{{ genre.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-12 col-md-3 d-grid">
+        <button class="btn btn-primary" type="submit" [disabled]="loading()">
+          <span class="fa-solid fa-magnifying-glass me-2"></span>Search
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2 mt-3">
+      <label class="form-label mb-0" for="sort">Sort by</label>
+      <select id="sort" name="sort" class="form-select form-select-sm w-auto"
+              [(ngModel)]="filter.orderBy" (ngModelChange)="search()">
+        @for (option of sortOptions; track option.value) {
+          <option [value]="option.value">{{ option.label }}</option>
+        }
+      </select>
+      <button class="btn btn-outline-light btn-sm" type="button" (click)="toggleSortDirection()"
+              [title]="filter.orderDirection === 'asc' ? 'Ascending' : 'Descending'">
+        <span class="fa-solid" [class.fa-arrow-up-short-wide]="filter.orderDirection === 'asc'"
+              [class.fa-arrow-down-wide-short]="filter.orderDirection === 'desc'"></span>
+      </button>
+    </div>
+  </form>
+
+  @if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  }
+
+  @if (loading()) {
+    <div class="text-center my-5">
+      <div class="spinner-border" role="status"></div>
+    </div>
+  } @else if (movies().length === 0) {
+    <div class="main-card text-center">
+      <h5 class="mb-0">No movies found.</h5>
+    </div>
+  } @else {
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+      @for (movie of movies(); track movie.showId) {
+        <div class="col">
+          <app-movie-card [movie]="movie"
+                          [isFavorite]="favoriteIds().has(movie.showId)"
+                          (favoriteToggle)="toggleFavorite($event)" />
+        </div>
+      }
+    </div>
+
+    <nav class="d-flex justify-content-center align-items-center gap-3 my-4">
+      <button class="btn btn-outline-light" type="button" (click)="previousPage()" [disabled]="page() === 1">
+        <span class="fa-solid fa-chevron-left me-2"></span>Previous
+      </button>
+      <span>Page {{ page() }}</span>
+      <button class="btn btn-outline-light" type="button" (click)="nextPage()" [disabled]="!hasNextPage()">
+        Next<span class="fa-solid fa-chevron-right ms-2"></span>
+      </button>
+    </nav>
+  }
+
 </div>
