@@ -1,7 +1,32 @@
-﻿services:
-  moviescreeningapp.api:
+services:
+  backend:
     image: moviescreeningapp.api
     build:
       context: .
       dockerfile: MovieScreeningApp.Api/Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    environment:
+      - ConnectionStrings__DbConnection=Server=database;Database=${MARIADB_DATABASE};User=${MARIADB_USER};Password=${MARIADB_PASSWORD};
+      - Admin__Token=${ADMIN_TOKEN}
+    volumes:
+      - filestore:/app/FileStore
 
+  db:
+    hostname: database
+    image: mariadb:11
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  filestore:
+  db:
