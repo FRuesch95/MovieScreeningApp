@@ -1,0 +1,58 @@
+services:
+  frontend:
+    image: ${REGISTRY_HOST}/movie-screening-app/frontend:${VERSION}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - proxy
+      - internal
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik_reverse_proxy
+      traefik.http.routers.movie-screening-${INSTANCE}-frontend.rule: Host(`${HOSTNAME}`) && !PathPrefix(`/api/`)
+      traefik.http.routers.movie-screening-${INSTANCE}-frontend.entrypoints: websecure
+
+  backend:
+    image: ${REGISTRY_HOST}/movie-screening-app/api:${VERSION}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    networks:
+      - proxy
+      - internal
+    labels:
+      traefik.enable: true
+      traefik.docker.network: traefik_reverse_proxy
+      traefik.http.routers.movie-screening-${INSTANCE}-backend.rule: Host(`${HOSTNAME}`) && PathPrefix(`/api/`)
+      traefik.http.routers.movie-screening-${INSTANCE}-backend.entrypoints: websecure
+    environment:
+      - ConnectionStrings__DbConnection=Server=${INSTANCE}-database;Database=${MARIADB_DATABASE};User=${MARIADB_USER};Password=${MARIADB_PASSWORD};
+      - Admin__Token=${ADMIN_TOKEN}
+    volumes:
+      - ./data/filestore:/app/FileStore:rw
+
+  db:
+    hostname: ${INSTANCE}-database
+    image: mariadb:11
+    restart: unless-stopped
+    networks:
+      - internal
+    env_file:
+      - ./.env
+    volumes:
+      - ./data/db:/var/lib/mysql:rw
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  proxy:
+    external: true
+    name: traefik_reverse_proxy
+  internal:
+    driver: bridge

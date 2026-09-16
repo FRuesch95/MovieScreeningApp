@@ -4,4 +4,6 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 FileStore/
-.env
+/.env
+deploy-template/data/*
+!deploy-template/data/.gitkeep
